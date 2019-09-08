@@ -2,7 +2,7 @@
 UBC Unmanned Aircraft Systems Skylink Repository
 
 #### Summary: 
-- Skylink acts as a relay between an RFD900 (Pixhawk) / SITL (Simulator) and a GCS program (QGroundcontrol / Missionplanner / Apm Planner).
+- Skylink acts as a relay between an RFD900 (Pixhawk) / SITL (Dronekit Simulator) and a GCS program (QGroundcontrol / Missionplanner / Apm Planner).
 - It also intercepts mavlink (https://mavlink.io/en/guide/serialization.html) GPS packets and trees them to Smurfette and the Antenna Tracker software through a TCP connection.
 
 #### Functional Requirements:
