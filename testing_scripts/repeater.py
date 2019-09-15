@@ -1,7 +1,13 @@
 from __future__ import print_function
 
-import time
+"""
+Skylink is a relay between an RFD900(Pixhawk)/SITL(Simulator) and a GCS(Ground control software)
+program (QGroundControl/Missionplanner). It interceps mavlink GPS packets and trees them between
+Smurfette and the Antenna Tracker Software through a TCP connection.
 
+e.g. the script can be run as 'python repeater.py [dstport] [srcport]' """
+
+import time
 from pymavlink import mavutil
 from argparse import ArgumentParser
 
@@ -22,13 +28,12 @@ mdst = mavutil.mavlink_connection('tcp:localhost:{}'.format(args.dstport), plann
 
 # simple basic byte pass through, no logging or viewing of packets, or analysis etc
 # while True:
-#  # L -> R
-#    m = msrc.recv();
-#    mdst.write(m);
-#  # R -> L
-#    m2 = mdst.recv();
-#    msrc.write(m2);
-
+ # # L -> R
+   # m = msrc.recv();
+   # mdst.write(m);
+ # # R -> L
+   # m2 = msrc.recv();
+   # msrc.write(m2); 
 
 # similar to the above, but with human-readable display of packets on stdout.
 # in this use case we abuse the self.logfile_raw() function to allow
@@ -51,6 +56,7 @@ while True:
                 l_timestamp = l_last_timestamp
             l_last_timestamp = l_timestamp
 
+        # this prints data received from Pixhawk/SITL
         print("--> %s.%02u: %s\n" % (
             time.strftime("%Y-%m-%d %H:%M:%S",
             time.localtime(l._timestamp)),
@@ -66,9 +72,11 @@ while True:
                 r_timestamp = r_last_timestamp
             r_last_timestamp = r_timestamp
 
+        # this sends position data to the GCS
         if 'GLOBAL_POSITION' in r.get_type():
             print("<-- %s.%02u: %s\n" % (
                 time.strftime("%Y-%m-%d %H:%M:%S",
                 time.localtime(r._timestamp)),
                 int(r._timestamp*100.0)%100, r))
+            print(type(r))
 
