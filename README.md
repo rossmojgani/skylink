@@ -1,5 +1,5 @@
 ## skylink
-UBC Unmanned Aircraft Systems Skylink Repository (Network programming)
+UBC Unmanned Aircraft Systems Skylink Repository (Network programming (TCP))
 
 #### Summary: 
 - Skylink acts as a relay between an RFD900 (Pixhawk) / SITL (Dronekit Simulator) and a GCS program (QGroundcontrol / Missionplanner / Apm Planner).
