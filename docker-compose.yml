@@ -1,0 +1,15 @@
+version: "3"
+services:
+  sitl:
+    image: radarku/sitl-swarm
+    environment:
+      NUMCOPTERS: 1
+      # Set location to UBC thunderbird field
+      LAT: 149.259223
+      LON: -123.2415589
+      ALT: 96
+    ports:
+      - 5760:5760
+    networks:
+      acomnet:
+        ipv4_address: 172.18.0.3
