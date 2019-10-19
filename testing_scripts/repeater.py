@@ -5,7 +5,9 @@ Skylink is a relay between an RFD900(Pixhawk)/SITL(Simulator) and a GCS(Ground c
 program (QGroundControl/Missionplanner). It interceps mavlink GPS packets and trees them between
 Smurfette and the Antenna Tracker Software through a TCP connection.
 
-e.g. the script can be run as 'python repeater.py [dstport] [srcport]' """
+e.g. the script can be run as 'python repeater.py [dstport] [srcport]'
+
+"""
 
 import time
 from pymavlink import mavutil
