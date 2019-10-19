@@ -24,4 +24,4 @@ UBC Unmanned Aircraft Systems Skylink Repository
 - Docker container
 
 #### To run SITL simlator:
-Run `docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=1 --end NUMROVERS=0 radarku/sitl-swarm`
+Run `docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm`
