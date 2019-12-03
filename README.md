@@ -5,6 +5,12 @@ UBC Unmanned Aircraft Systems Skylink Repository
 - Skylink acts as a relay between an RFD900 (Pixhawk) / SITL (Dronekit Simulator) and a GCS program (QGroundcontrol / Missionplanner / Apm Planner).
 - It also intercepts mavlink (https://mavlink.io/en/guide/serialization.html) GPS packets and trees them to Smurfette and the Antenna Tracker software through a TCP connection. (See confluence page for more details)
 
+#### How To Use:
+1. Run the SITL docker which acts as the Pixhawk would `docker run --rm -p 5760-5760:5760-5760 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm` to display the SITL simulator which simulates the pixhawk on port `5760`
+2. Run the skylink main python file as `python repeater.py [dstport] [srcport]` with `dstport = 5761` and `srcport = 5760` so `python repeater.py 5761 5760` to run Skylink listenting to the SITL pixhawk simulator docker ran in step 1 and then setup a server on port `5761` for the GCS mavlink connection. Additionally there is temporarily hardcoded port (soon to be another argument) to send the global position data over on a port to Smurfette and Antenna Tracker
+3. Run `python client.py` to simulate a listener such as smurfette or antenna tracker which are clients for this data
+4. Run QGroundControl Software and connect to 127.0.0.1:5761 and run the drone and you should see data on the client.py and repeater.py
+
 #### Functional Requirements:
 - Have low latency relay between the Pixhawk/SITL and the GCS program (C++) mavlink library
 - Pixhawk hardware serial
@@ -23,4 +29,4 @@ UBC Unmanned Aircraft Systems Skylink Repository
 - Docker container
 
 #### To run SITL simlator:
-Run `docker run --rm -p 5760-5810:5760-5810 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm`
+Run `docker run --rm -p 5760-5760:5760-5760 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm`

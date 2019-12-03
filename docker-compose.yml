@@ -10,6 +10,3 @@ services:
       ALT: 96
     ports:
       - 5760:5760
-    networks:
-      acomnet:
-        ipv4_address: 172.18.0.3
