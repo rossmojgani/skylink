@@ -26,7 +26,7 @@ UBC Unmanned Aircraft Systems Skylink Repository
 - Basically, smurfette and antenna tracker should get their data without a GCS driving the messages.
 - Command-line arguments for port numbers
 - Automatically reconnect to any of the connects if they drop
-- Docker container
+- Runs as a docker container
 
 #### To run SITL simlator:
 Run `docker run --rm -p 5760-5760:5760-5760 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm`
