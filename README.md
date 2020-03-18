@@ -5,6 +5,20 @@ UBC Unmanned Aircraft Systems Skylink Repository
 - Skylink acts as a relay between an RFD900 (Pixhawk) / SITL (Dronekit Simulator) and a GCS program (QGroundcontrol / Missionplanner / Apm Planner).
 - It also intercepts mavlink (https://mavlink.io/en/guide/serialization.html) GPS packets and trees them to Smurfette and the Antenna Tracker software through a TCP connection. (See confluence page for more details)
 
+#### Usage
+
+```
+docker build . -t skylink
+docker run -p [TELEM PORT]:[TELEM PORT] -p [DEST PORT]:[DEST PORT] -it skylink python skylink.py [SOURCE STRING] [DEST PORT] [TELEM PORT]
+```
+#### Examples
+
+If you wanted to bridge from the RFD to port 1234, with telem on 5555
+`docker run -p 5555:5555 -p 1234:1234 -it skylink python skylink.py /dev/ttyUSB0 1234 5555`
+
+If you wanted to bridge from the docker SITL with docker ip 172.0.0.6 and port 5670 to port 1234, with telem on 5555
+`docker run -p 5555:5555 -p 1234:1234 -it skylink python skylink.py tcp:172.0.0.6:5760 1234 5555`
+
 #### How To Use:
 1. Run the SITL docker which acts as the Pixhawk would `docker run --rm -p 5760-5760:5760-5760 --env NUMCOPTERS=1 --env NUMROVERS=0 radarku/sitl-swarm` to display the SITL simulator which simulates the pixhawk on port `5760`
 2. Run the skylink main python file as `python repeater.py [dstport] [srcport]` with `dstport = 5761` and `srcport = 5760` so `python repeater.py 5761 5760` to run Skylink listenting to the SITL pixhawk simulator docker ran in step 1 and then setup a server on port `5761` for the GCS mavlink connection. Additionally there is temporarily hardcoded port (soon to be another argument) to send the global position data over on a port to Smurfette and Antenna Tracker
